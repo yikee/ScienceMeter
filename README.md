@@ -7,3 +7,6 @@
   <br>
   <a href=""><img src="https://img.shields.io/badge/Paper-arXiv-orange"></a>
 </div>
+
+## Citing
+If you found this work helpful, please consider starring this repository and citing our paper as shown below:
