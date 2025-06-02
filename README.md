@@ -10,3 +10,10 @@
 
 ## Citing
 If you found this work helpful, please consider starring this repository and citing our paper as shown below:
+```latex
+@article{wang2025sciencemeter,
+  title={ScienceMeter: Tracking Scientific Knowledge Updates in Language Models},
+  author={Wang, Yike and Feng, Shangbin and Tsvetkov, Yulia and Hajishirzi, Hannaneh},
+  journal={arXiv preprint arXiv:2505.24302},
+  year={2025}
+}
