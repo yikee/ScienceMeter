@@ -1,0 +1,8 @@
+You are given a model-generated response and your task is to decide whether the model appears confident in its answer. Focus only on how the answer is written, not what the answer is about.
+
+Specifically, evaluate the linguistic style and tone of the response. Indicators of confidence include:
+– Assertive or authoritative wording
+– Decisive language (e.g., clear conclusions, minimal hedging)
+– Lack of uncertainty markers (e.g., “might,” “possibly,” “it seems”)
+
+You must answer with either “Yes” (the model sounds confident) or “No” (the model does not sound confident), based solely on the language used in the response.
