@@ -39,19 +39,19 @@ python eval_judgment.py \
 # example
 python eval_generation.py \
   --basemodel olmo32b \
-  --model ar_testdoc \
+  --model _ar_testdoc \
   --domain education \
   --knowledge future \
   --portion 1.0
 ```
 ## Evaluation of knowledge Update Methods
-The `metrics.py` script computes all eight evaluation metrics introduced in the paper, based on evaluation results obtained before (`basemodel`) and after (`model`) a knowledge update. The `model` is assumed to be a knowledge-updated version of the `basemodel`, using a specified update method (e.g., `ar_traintestdoc_it_trainqa`).
+The `metrics.py` script computes all eight evaluation metrics introduced in the paper, based on evaluation results obtained before (`basemodel`) and after (`model`) a knowledge update. The `model` is assumed to be a knowledge-updated version of the `basemodel`, using a specified update method (e.g., `_ar_traintestdoc_it_trainqa`).
 
 ```bash
 # example
 python metrics.py \
   --basemodel llama \
-  --model ar_traintestdoc_it_trainqa \
+  --model _ar_traintestdoc_it_trainqa \
   --domain political_science \
   --task judgment
 ```
