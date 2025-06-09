@@ -21,7 +21,7 @@ We retrieve 1,000 journal or conference papers from each of 10 scientific domain
 We filter out papers that lack citation information or abstracts, then regroup the remaining papers based on the knowledge cutoff date of a given model and the publication dates of the papers. This process yields 5,148 triplets of (prior paper, new paper, future paper). For each paper, we synthetically generate one SUPPORT claim (a uniquely supporting scientific claim) and one REFUTE claim (a relevant but non-supporting scientific claim). The resulting dataset is available in the `filtered_with_claims` folder.
 
 ## Evaluation of Scientific Knowledge
-The `eval_judgment.py` and `eval_generation.py` scripts evaluate a specific type of scientific knowledge in the `model`, which represents the knowledge-updated version of the `basemodel`. If `model` is the same as `basemodel`, the evaluation will be performed on the unupdated base model. The proportion of data to evaluate can be adjusted using the `--portion` argument.
+The `eval_judgment.py` and `eval_generation.py` scripts are used to evaluate a specific type of scientific knowledge in the `model`, assumed to be a knowledge-updated version of the `basemodel`. If the `model` and `basemodel` are the same, the evaluation is performed on the `basemodel`. The `--portion` argument allows control over the fraction of the dataset used for evaluation.
 
 ### Claim Judgment Task
 ```bash
@@ -39,11 +39,25 @@ python eval_judgment.py \
 # example
 python eval_generation.py \
   --basemodel olmo32b \
-  --model ar_testdoc \
+  --model _ar_testdoc \
   --domain education \
   --knowledge future \
   --portion 1.0
 ```
+## Evaluation of knowledge Update Methods
+The `metrics.py` script computes all eight evaluation metrics introduced in the paper, based on evaluation results obtained before (`basemodel`) and after (`model`) a knowledge update. The `model` is assumed to be a knowledge-updated version of the `basemodel`, using a specified update method (e.g., `_ar_traintestdoc_it_trainqa`).
+
+```bash
+# example
+python metrics.py \
+  --basemodel llama \
+  --model _ar_traintestdoc_it_trainqa \
+  --domain political_science \
+  --task judgment
+```
+
+## Questions
+If you have any questions or comments about our paper, data, or scripts, or if you notice any issues in the code, feel free to reach out via email at `yikewang@cs.washington.edu`. We will do our best to respond within one business day.
 
 ## Citing
 If you found this work helpful, please consider starring this repository and citing our paper as shown below:
