@@ -56,6 +56,32 @@ python metrics.py \
   --task judgment
 ```
 
+## Knowledge Update Baselines
+The following examples show how to run training baselines using `llama` as the base model and `computer_science` as the target domain.
+
+### Continual Pre-training
+
+```bash
+python ar.py -bm llama -m llama -d computer_science -ds testdoc
+# Output model will be saved as: llama/computer_science/_ar_testdoc
+```
+
+### Standard Instruction-tuning
+
+```bash
+python ar.py -bm llama -m llama -d computer_science -ds traintestdoc
+python it.py -bm llama -m _ar_traintestdoc -d computer_science -ds trainqa
+# Output model will be saved as: llama/computer_science/_ar_traintestdoc_it_trainqa
+```
+
+### Pre-instruction-tuning
+
+```bash
+python it.py -bm llama -m llama -d computer_science -ds trainqadoc
+python ar.py -bm llama -m _it_trainqadoc -d computer_science -ds testdoc
+# Output model will be saved as: llama/computer_science/_it_trainqadoc_ar_testdoc
+```
+
 ## Questions
 If you have any questions or comments about our paper, data, or scripts, or if you notice any issues in the code, feel free to reach out via email at `yikewang@cs.washington.edu`. We will do our best to respond within one business day.
 
