@@ -8,6 +8,11 @@
   <a href=""><img src="https://img.shields.io/badge/Paper-arXiv-orange"></a>
 </div>
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/2d52257d-9543-4064-943a-d5b5800d43d9" width="800" />
+</p>
+
+
 ⚠️ This repository is currently a work in progress and is not yet complete. Code and documentation may be missing or subject to change. We will try to complete it as soon as possible. Thank you for your patience!
 
 ## Dataset
