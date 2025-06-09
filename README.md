@@ -56,6 +56,9 @@ python metrics.py \
   --task judgment
 ```
 
+## Questions
+If you have any questions or comments about our paper, data, or scripts, or if you notice any issues in the code, feel free to reach out via email at `yikewang@cs.washington.edu`. We will do our best to respond within one business day.
+
 ## Citing
 If you found this work helpful, please consider starring this repository and citing our paper as shown below:
 ```latex
