@@ -23,9 +23,9 @@ client = AzureOpenAI(
 
 if __name__ == "__main__":
     argParser = argparse.ArgumentParser()
-    argParser.add_argument("-bm", "--basemodel", help='Base model to use, e.g., "llama"')
-    argParser.add_argument("-m", "--model", help='Updated model to use, e.g., "llama", "it_trainqadoc"')
-    argParser.add_argument("-d", "--domain", help='Domain to evaluate, e.g., "computer_science"')
+    argParser.add_argument("-bm", "--basemodel", help='Base model to eval, e.g., "llama"')
+    argParser.add_argument("-m", "--model", help='Updated model to eval, e.g., "llama", "it_trainqadoc"')
+    argParser.add_argument("-d", "--domain", help='Domain, e.g., "computer_science"')
     argParser.add_argument("-k", "--knowledge", help='Knowledge type: "prior", "new", or "future"')
     argParser.add_argument("-o", "--portion", type=float, default=1.0, help="Portion of the dataset to use (default: 1.0)")
 
