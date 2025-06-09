@@ -24,7 +24,7 @@ client = AzureOpenAI(
 if __name__ == "__main__":
     argParser = argparse.ArgumentParser()
     argParser.add_argument("-bm", "--basemodel", help='Base model to use, e.g., "llama"')
-    argParser.add_argument("-m", "--model", help='Language model to use, e.g., "llama", "it_trainqadoc"')
+    argParser.add_argument("-m", "--model", help='Updated model to use, e.g., "llama", "it_trainqadoc"')
     argParser.add_argument("-d", "--domain", help='Domain to evaluate, e.g., "computer_science"')
     argParser.add_argument("-k", "--knowledge", help='Knowledge type: "prior", "new", or "future"')
     argParser.add_argument("-o", "--portion", type=float, default=1.0, help="Portion of the dataset to use (default: 1.0)")
@@ -42,14 +42,7 @@ if __name__ == "__main__":
         model_to_use = f"models/{basemodel}/{domain}/{model}"
     lm_utils.llm_init(model_to_use)
 
-    name_map = {
-            "llama": "llama3.1-8B",
-            "olmo7b": "olmo2-7B",
-            "olmo32b": "olmo2-32B",
-            "honeybee": "honeybee",
-        }
-    model_key = name_map.get(basemodel, basemodel)
-    dataset_path = f"dataset/filtered_with_claims/{model_key}/{domain}.jsonl"
+    dataset_path = f"dataset/filtered_with_claims/{basemodel}/{domain}.jsonl"
     with open(dataset_path, "r") as f:
         data = json.load(f)
 
