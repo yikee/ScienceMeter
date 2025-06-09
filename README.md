@@ -20,6 +20,31 @@ We retrieve 1,000 journal or conference papers from each of 10 scientific domain
 
 We filter out papers that lack citation information or abstracts, then regroup the remaining papers based on the knowledge cutoff date of a given model and the publication dates of the papers. This process yields 5,148 triplets of (prior paper, new paper, future paper). For each paper, we synthetically generate one SUPPORT claim (a uniquely supporting scientific claim) and one REFUTE claim (a relevant but non-supporting scientific claim). The resulting dataset is available in the `filtered_with_claims` folder.
 
+## Evaluation of Scientific Knowledge
+The `eval_judgment.py` and `eval_generation.py` scripts evaluate a specific type of scientific knowledge in the `model`, which represents the knowledge-updated version of the `basemodel`. If `model` is the same as `basemodel`, the evaluation will be performed on the unupdated base model. The proportion of data to evaluate can be adjusted using the `--portion` argument.
+
+### Claim Judgment Task
+```bash
+# example
+python eval_judgment.py \
+  --basemodel llama \
+  --model llama \
+  --domain computer_science \
+  --knowledge new \
+  --portion 0.8
+```
+
+### Claim Generation Task
+```bash
+# example
+python eval_generation.py \
+  --basemodel olmo32b \
+  --model ar_testdoc \
+  --domain education \
+  --knowledge future \
+  --portion 1.0
+```
+
 ## Citing
 If you found this work helpful, please consider starring this repository and citing our paper as shown below:
 ```latex
