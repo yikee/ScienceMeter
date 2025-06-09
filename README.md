@@ -21,7 +21,7 @@ We retrieve 1,000 journal or conference papers from each of 10 scientific domain
 We filter out papers that lack citation information or abstracts, then regroup the remaining papers based on the knowledge cutoff date of a given model and the publication dates of the papers. This process yields 5,148 triplets of (prior paper, new paper, future paper). For each paper, we synthetically generate one SUPPORT claim (a uniquely supporting scientific claim) and one REFUTE claim (a relevant but non-supporting scientific claim). The resulting dataset is available in the `filtered_with_claims` folder.
 
 ## Evaluation of Scientific Knowledge
-The `eval_judgment.py` and `eval_generation.py` scripts are used to evaluate a specific type of scientific knowledge in a target `model`, assumed to be a knowledge-updated version of a given `basemodel`. If the `model` and `basemodel` are the same, the evaluation is performed on the original, unupdated model. The `--portion` argument allows control over the fraction of the dataset used for evaluation.
+The `eval_judgment.py` and `eval_generation.py` scripts are used to evaluate a specific type of scientific knowledge in the `model`, assumed to be a knowledge-updated version of the `basemodel`. If the `model` and `basemodel` are the same, the evaluation is performed on the `basemodel`. The `--portion` argument allows control over the fraction of the dataset used for evaluation.
 
 ### Claim Judgment Task
 ```bash
@@ -45,7 +45,7 @@ python eval_generation.py \
   --portion 1.0
 ```
 ## Evaluation of knowledge Update Methods
-The `metrics.py` script computes all eight evaluation metrics introduced in the paper, based on evaluation results obtained before (`basemodel`) and after (`model`) a knowledge update. The `model` is assumed to be a knowledge-updated version of the `basemodel`, using a specified update method (e.g., `it_trainqadoc_ar_testdoc`).
+The `metrics.py` script computes all eight evaluation metrics introduced in the paper, based on evaluation results obtained before (`basemodel`) and after (`model`) a knowledge update. The `model` is assumed to be a knowledge-updated version of the `basemodel`, using a specified update method (e.g., `ar_traintestdoc_it_trainqa`).
 
 ```bash
 # example
