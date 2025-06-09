@@ -10,10 +10,10 @@ from peft import (
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-bm", "--basemodel", required=True, help="Base model key (e.g., llama, olmo7b, olmo32b, honeybee)")
+    parser.add_argument("-bm", "--basemodel", required=True, help="Base model (e.g., llama, olmo7b, olmo32b, honeybee)")
     parser.add_argument("-m", "--model", required=True, help="Model variant (e.g., _it_trainqadoc)")
-    parser.add_argument("-d", "--domain", required=True, help="Domain of the dataset (e.g., computer_science)")
-    parser.add_argument("-ds", "--dataset", required=True, help="Dataset name (e.g., trainqa)")
+    parser.add_argument("-d", "--domain", required=True, help="Domain (e.g., computer_science)")
+    parser.add_argument("-ds", "--dataset", required=True, help="Training files (e.g., trainqa)")
     parser.add_argument("-e", "--epochs", type=int, default=4, help="Number of training epochs")
     return parser.parse_args()
 
