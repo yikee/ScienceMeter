@@ -12,9 +12,6 @@
   <img src="https://github.com/user-attachments/assets/2d52257d-9543-4064-943a-d5b5800d43d9" width="800" />
 </p>
 
-
-⚠️ This repository is currently a work in progress and is not yet complete. Code and documentation may be missing or subject to change. We will try to complete it as soon as possible. Thank you for your patience!
-
 ## Dataset
 We retrieve 1,000 journal or conference papers from each of 10 scientific domains using the [Semantic Scholar API](https://www.semanticscholar.org/product/api#api-key-form). For each paper, we also collect its citing papers, forming our `raw` corpus.
 
