@@ -75,6 +75,7 @@ if __name__ == "__main__":
             all_data[before_key] = [label_generation_instance(instance) for instance in all_data[before_key]]
             all_data[after_key] = [label_generation_instance(instance) for instance in all_data[after_key]]
 
+    print("-----------------")
     knowledge = "prior"
     before_data, after_data = all_data[f"{knowledge}_before"], all_data[f"{knowledge}_after"]
     denominator = len([b for b in before_data if b["label"] == "correct"])
@@ -90,6 +91,7 @@ if __name__ == "__main__":
     print("distortion in Perservation: ", round(distortion/denominator, 3))
     print("loss in Perservation: ", round(loss/denominator, 3))
 
+    print("-----------------")
     knowledge = "new"
     before_data, after_data = all_data[f"{knowledge}_before"], all_data[f"{knowledge}_after"]
     denominator = len([b for b in before_data if b["label"] == "unknown"])
@@ -105,6 +107,7 @@ if __name__ == "__main__":
     print("distortion in Acquisition: ", round(distortion/denominator, 3))
     print("loss in Acquisition:", round(loss/denominator, 3))
 
+    print("-----------------")
     knowledge = "future"
     before_data, after_data = all_data[f"{knowledge}_before"], all_data[f"{knowledge}_after"]
     denominator = len([b for b in before_data if b["label"] == "unknown"])
@@ -116,3 +119,4 @@ if __name__ == "__main__":
             loss += 1
     print("Knowledge Projection: ", round(success/denominator, 3))
     print("loss in Projection:", round(loss/denominator, 3))
+    print("-----------------")
