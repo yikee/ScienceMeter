@@ -5,7 +5,7 @@
   <br>
   <sup>1</sup>University of Washington, <sup>2</sup>Allen Institute for Artificial Intelligence
   <br><br>
-  <a href=""><img src="https://img.shields.io/badge/Paper-arXiv-orange"></a>
+  <a href="https://www.arxiv.org/abs/2505.24302"><img src="https://img.shields.io/badge/Paper-arXiv-orange"></a>
 </div>
 
 <p align="center">
