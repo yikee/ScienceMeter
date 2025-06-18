@@ -51,14 +51,14 @@ if __name__ == "__main__":
 
     output = []
 
-    def load_prompt(file_path, basemodel):
+    def load_prompt(file_path):
         with open(file_path) as f:
             prompt = f.read().rstrip("\n")
         return prompt
 
     base_path = "./prompts"
-    generation_by_title_prompt = load_prompt(f"{base_path}/generation_by_title.prompt", basemodel)
-    generation_by_subject_prompt = load_prompt(f"{base_path}/generation_by_subject.prompt", basemodel)
+    generation_by_title_prompt = load_prompt(f"{base_path}/generation_by_title.prompt")
+    generation_by_subject_prompt = load_prompt(f"{base_path}/generation_by_subject.prompt")
 
     with open("prompts/subject.prompt") as f:
         subject_prompt = f.read().rstrip("\n")
