@@ -57,6 +57,7 @@ if __name__ == "__main__":
 
         return instance
     
+
     all_data = {}
     for knowledge in ["prior", "new", "future"]:
         before_key = f"{knowledge}_before" # before knowledge updates
@@ -75,48 +76,56 @@ if __name__ == "__main__":
             all_data[before_key] = [label_generation_instance(instance) for instance in all_data[before_key]]
             all_data[after_key] = [label_generation_instance(instance) for instance in all_data[after_key]]
 
-    print("-----------------")
-    knowledge = "prior"
-    before_data, after_data = all_data[f"{knowledge}_before"], all_data[f"{knowledge}_after"]
-    denominator = len([b for b in before_data if b["label"] == "correct"])
-    success, distortion, loss = 0, 0, 0
-    for b, a in zip(before_data, after_data):
-        if b["label"] == "correct" and a["label"] == "correct":
-            success += 1
-        elif b["label"] == "correct" and a["label"] == "incorrect":
-            distortion += 1
-        elif b["label"] == "correct" and a["label"] == "unknown":
-            loss += 1
-    print("Knowledge Preservation: ", round(success/denominator, 3))
-    print("distortion in Perservation: ", round(distortion/denominator, 3))
-    print("loss in Perservation: ", round(loss/denominator, 3))
+
+    pres = {"denominator": 0, "succ": 0, "dist": 0, "loss": 0}
+    acq  = {"denominator": 0, "succ": 0, "dist": 0, "loss": 0}
+    proj = {"denominator": 0, "succ": 0, "loss": 0}
+
+    for pb, pa, nb, na, fb, fa in zip(all_data["prior_before"], all_data["prior_after"],
+                                    all_data["new_before"], all_data["new_after"],
+                                    all_data["future_before"], all_data["future_after"]):
+
+        # 1) Knowledge Preservation (prior)
+        if pb["label"] == "correct" and nb["label"] == "unknown":
+            pres["denominator"] += 1
+            if pa["label"] == "correct":
+                pres["succ"] += 1
+            elif pa["label"] == "incorrect":
+                pres["dist"] += 1
+            else:                         # pa["label"] == "unknown"
+                pres["loss"] += 1
+
+        # 2) Knowledge Acquisition (new)
+        if nb["label"] == "unknown":
+            acq["denominator"] += 1
+            if na["label"] == "correct":
+                acq["succ"] += 1
+            elif na["label"] == "incorrect":
+                acq["dist"] += 1
+            else:                         # na["label"] == "unknown"
+                acq["loss"] += 1
+
+        # 3) Knowledge Projection (future)
+        if fb["label"] == "unknown" and nb["label"] == "unknown":
+            proj["denominator"] += 1
+            if fa["label"] == "correct":
+                proj["succ"] += 1
+            else:                         # fa["label"] == "unknown"
+                proj["loss"] += 1
+
+    safe = lambda x, d: round(x / d, 3) if d else 0.0
 
     print("-----------------")
-    knowledge = "new"
-    before_data, after_data = all_data[f"{knowledge}_before"], all_data[f"{knowledge}_after"]
-    denominator = len([b for b in before_data if b["label"] == "unknown"])
-    success, distortion, loss = 0, 0, 0
-    for b, a in zip(before_data, after_data):
-        if b["label"] == "correct" and a["label"] == "correct":
-            success += 1
-        elif b["label"] == "correct" and a["label"] == "incorrect":
-            distortion += 1
-        elif b["label"] == "correct" and a["label"] == "unknown":
-            loss += 1
-    print("Knowledge Acquisition: ", round(success/denominator, 3))
-    print("distortion in Acquisition: ", round(distortion/denominator, 3))
-    print("loss in Acquisition:", round(loss/denominator, 3))
+    print("Knowledge Preservation:         ", safe(pres["succ"], pres["denominator"]))
+    print("distortion in Preservation:     ", safe(pres["dist"], pres["denominator"]))
+    print("loss in Preservation:           ", safe(pres["loss"], pres["denominator"]))
 
     print("-----------------")
-    knowledge = "future"
-    before_data, after_data = all_data[f"{knowledge}_before"], all_data[f"{knowledge}_after"]
-    denominator = len([b for b in before_data if b["label"] == "unknown"])
-    success, loss = 0, 0
-    for b, a in zip(before_data, after_data):
-        if b["label"] == "correct" and a["label"] == "correct":
-            success += 1
-        elif b["label"] == "correct" and a["label"] == "unknown":
-            loss += 1
-    print("Knowledge Projection: ", round(success/denominator, 3))
-    print("loss in Projection:", round(loss/denominator, 3))
+    print("Knowledge Acquisition:          ", safe(acq["succ"], acq["denominator"]))
+    print("distortion in Acquisition:      ", safe(acq["dist"], acq["denominator"]))
+    print("loss in Acquisition:            ", safe(acq["loss"], acq["denominator"]))
+
+    print("-----------------")
+    print("Knowledge Projection:           ", safe(proj["succ"], proj["denominator"]))
+    print("loss in Projection:             ", safe(proj["loss"], proj["denominator"]))
     print("-----------------")
