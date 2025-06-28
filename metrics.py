@@ -92,7 +92,7 @@ if __name__ == "__main__":
                 pres["succ"] += 1
             elif pa["label"] == "incorrect":
                 pres["dist"] += 1
-            else:                         # pa["label"] == "unknown"
+            elif pa["label"] == "unknown":
                 pres["loss"] += 1
 
         # 2) Knowledge Acquisition (new)
@@ -102,7 +102,7 @@ if __name__ == "__main__":
                 acq["succ"] += 1
             elif na["label"] == "incorrect":
                 acq["dist"] += 1
-            else:                         # na["label"] == "unknown"
+            elif na["label"] == "unknown":
                 acq["loss"] += 1
 
         # 3) Knowledge Projection (future)
@@ -110,7 +110,7 @@ if __name__ == "__main__":
             proj["denominator"] += 1
             if fa["label"] == "correct":
                 proj["succ"] += 1
-            else:                         # fa["label"] == "unknown"
+            elif fa["label"] == "unknown":
                 proj["loss"] += 1
 
     safe = lambda x, d: round(x / d, 3) if d else 0.0
